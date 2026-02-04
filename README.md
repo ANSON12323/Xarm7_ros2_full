@@ -28,7 +28,7 @@
 1️⃣ Installation & Build
 First, ensure your environment is set up. This project is optimized for ROS 2 Jazzy.
 
-Bash
+```bash
 # Navigate to your workspace
 cd ~/ros2_ws
 
