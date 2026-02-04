@@ -16,7 +16,7 @@
 
 | Package | Description |
 | :--- | :--- |
-| **`xarm7_description`** | Contains URDFs, meshes, and basic launch files. |
+| **`xarm7`** | Contains URDFs, meshes, and basic launch files. |
 | **`xarm7_bringup`** | Launch files to start robot drivers and simulation environments. |
 | **`xarm7_moveit`** | **MoveIt 2** configuration for motion planning and collision checking. |
 | **`xarm7_commander_cpp`** | C++ interface for controlling the manipulator programmatically. |
