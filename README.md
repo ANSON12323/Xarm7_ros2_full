@@ -2,7 +2,10 @@ Xarm7_ros2_full-A Complete standalone package of Xarm7 for ROS2 Jazzy
 
 Consists of the following packages
 1.Xarm7-Which is basically the description package, contains the urdf, meshes, launch files
-2.
+2.xarm7_bringup: Launch files and configurations to easily start up the robot drivers and simulation environments.
+3.xarm7_moveit: Full MoveIt 2 configuration for motion planning, collision checking, and trajectory execution.
+4.xarm7_commander_cpp: C++ interface and examples for sending commands and controlling the manipulator programmatically.
+5.xarm7_interfaces: Custom ROS 2 messages and service definitions required for communication.
 
 
 How to run the simulation!
