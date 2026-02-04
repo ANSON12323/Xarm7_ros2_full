@@ -23,26 +23,6 @@
 | **`xarm7_interfaces`** | Custom ROS 2 messages and services. |
 
 ---
-
-### 📂 File Tree
-```text
-Xarm7_ros2_full/
-├── xarm7/
-│   ├── urdf/          # Robot model files
-│   ├── meshes/        # Visualization assets
-│   └── launch/        # Base launch files
-├── xarm7_bringup/
-│   ├── launch/        # Gazebo/Driver configs
-│   └── config/        # Controller YAMLs
-├── xarm7_moveit/
-│   ├── config/        # Planning configs
-│   └── launch/        # MoveIt runtime
-└── xarm7_commander_cpp/
-    ├── src/           # Source code
-    └── include/       # Headers
-
----
-
 ### 🛠️ BUild Package
 **🚀 How to Run the Simulation**
 1️⃣ Installation & Build
