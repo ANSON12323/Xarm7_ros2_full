@@ -1,77 +1,74 @@
-Here’s a beautifully formatted version of your GitHub README.md content.  
-It uses GitHub Flavored Markdown + allowed HTML elements (headings, lists, code blocks, tables, emojis, blockquotes, horizontal rules, etc.) to make it more visually appealing and easy to read.
+<h1 align="center">🤖 XArm7 ROS 2 Full</h1>
 
-```markdown
-<div align="center">
+<p align="center">
+  <b>A Complete Standalone Package for ROS 2 Jazzy</b>
+  <br><br>
+  <img src="https://img.shields.io/badge/ROS_2-Jazzy-blue?logo=ros&logoColor=white" alt="ROS 2 Jazzy" />
+  <img src="https://img.shields.io/badge/Build-Colcon-orange" alt="Build Status" />
+  <img src="https://img.shields.io/badge/License-MIT-green" alt="License" />
+  <br><br>
+  XArm7 ROS 2 Full provides description files, MoveIt 2 configurations, and C++ interfaces to simulate and control the XArm7 manipulator.
+</p>
 
-# Xarm7_ros2_full 🚀  
-**A Complete Standalone Package for XArm7 on ROS 2 Jazzy**
+---
 
-</div>
+## 📦 Package Overview
 
-<br>
+| Package | Description |
+| :--- | :--- |
+| **`xarm7_description`** | Contains URDFs, meshes, and basic launch files. |
+| **`xarm7_bringup`** | Launch files to start robot drivers and simulation environments. |
+| **`xarm7_moveit`** | **MoveIt 2** configuration for motion planning and collision checking. |
+| **`xarm7_commander_cpp`** | C++ interface for controlling the manipulator programmatically. |
+| **`xarm7_interfaces`** | Custom ROS 2 messages and services. |
 
-> Modern, ready-to-use integration of the XArm7 manipulator with ROS 2 Jazzy — simulation, MoveIt 2, and programmatic control included.
-
-<br>
-
-## ✨ Packages Included
-
-| # | Package                  | Description                                                                 |
-|---|--------------------------|-----------------------------------------------------------------------------|
-| 1 | **xarm7**                | Core description package: URDF, meshes, launch files                        |
-| 2 | **xarm7_bringup**        | Launch files & configs to start robot drivers and simulation easily        |
-| 3 | **xarm7_moveit**         | Full **MoveIt 2** configuration — motion planning, collision checking, trajectory execution |
-| 4 | **xarm7_commander_cpp**  | C++ interface + examples for sending commands and programmatic control     |
-| 5 | **xarm7_interfaces**     | Custom ROS 2 messages & services for communication                          |
-
-<br>
+---
 
 ## 🚀 How to Run the Simulation
 
-Follow these steps to get the XArm7 up and running in simulation:
+### 1. Installation & Build
 
-1. **Clone / Download** all packages into your workspace  
-   ```bash
-   cd ~/ros2_ws/src
-   git clone <your-repo-url-or-each-package>
-   ```
+Clone the packages into your workspace `src` folder.
 
-2. **Build** the workspace  
-   ```bash
-   cd ~/ros2_ws
-   colcon build --symlink-install
-   ```
+```bash
+# Clone repositories
+git clone <YOUR_REPO_LINK> src/
 
-3. **Source** the workspace  
-   ```bash
-   source install/setup.bash
-   ```
+# Build and Source
+colcon build
+source install/setup.bash
+```
+### 2. Execution (3 Terminals)
 
-4. **Open 3 terminals** and run the following commands:
+**Terminal 1: Launch Simulation**
 
-### Terminal 1 – Start simulation & RViz
 ```bash
 ros2 launch xarm7_bringup display.launch.xml
+
 ```
 
-### Terminal 2 – Start the C++ commander node (optional but recommended)
+**Terminal 2: Run Commander**
+
 ```bash
 ros2 run xarm7_commander_cpp commander_cpp
+
 ```
 
-### Terminal 3 – Send commands!
+**Terminal 3: Robot Commands**
+*Use the commands below to control the robot.*
 
-You have **three main ways** to command the robot:
+### Option 1: Joint Command
 
-#### A. Joint Command (position control – quick & simple)
+*Send an array of 7 float values.*
 
 ```bash
-ros2 topic pub -1 /joint_command example_interfaces/msg/Float64MultiArray \
-"{data: [0.0, 0.0, 0.0, 1.5, 0.0, 0.0, 0.0]}"
+ros2 topic pub -1 /joint_command example_interfaces/msg/Float64MultiArray "{data: [0.0, 0.0, 0.0, 1.5, 0.0, 0.0, 0.0]}"
+
 ```
 
-#### B. Joint Trajectory (smooth interpolated motion)
+### Option 2: Joint Trajectory
+
+*Send a trajectory with timing.*
 
 ```bash
 ros2 topic pub -1 /arm_controller/joint_trajectory trajectory_msgs/msg/JointTrajectory "{
@@ -83,71 +80,33 @@ ros2 topic pub -1 /arm_controller/joint_trajectory trajectory_msgs/msg/JointTraj
     }
   ]
 }"
+
 ```
 
-#### C. Cartesian Pose Command
+### Option 3: Pose Command
+
+*Send a Cartesian target (x, y, z, roll, pitch, yaw).*
 
 ```bash
-ros2 topic pub -1 /pose_command xarm7_interfaces/msg/PoseCommand "{
-  x: 0.2, y: 0.0, z: 0.6,
-  roll: 3.14, pitch: 0.0, yaw: 0.0,
-  cartesian_path: false
-}"
+ros2 topic pub -1 /pose_command xarm7_interfaces/msg/PoseCommand "{x: 0.2, y: 0.0, z: 0.6, roll: 3.14, pitch: 0.0, yaw: 0.0, cartesian_path: false}"
+
 ```
-
-<br>
-
-## 🛠️ Debugging Tips
-
-Useful commands to inspect what's happening:
-
-```bash
-# See all active topics
-ros2 topic list
-
-# Get detailed info about a topic
-ros2 topic info /joint_command
-
-# List loaded controllers and their states
-ros2 controller list_controllers
-```
-
-<br>
 
 ---
 
-<div align="center">
+## 🛠 Debugging
 
-Made with ❤️ for the ROS 2 & robotics community  
-⭐ Star this repo if you find it useful!
+```bash
+# List all active topics
+ros2 topic list
 
-</div>
+# Get info on a specific topic
+ros2 topic info /<topic_name>
+
+# Check active controllers
+ros2 control list_controllers
+
 ```
 
-### Quick explanations of improvements
-
-- **Centered title** with emoji + big heading for strong first impression
-- **Table** for packages → very readable and professional
-- **Emojis** as visual anchors (🚀, ✨, 🛠️)
-- **Code blocks** with bash / ros2 syntax highlighting (GitHub auto-detects)
-- **Numbered + lettered steps** + bold subheadings
-- **Horizontal rules** (`---`) and `<br>` for better spacing
-- **Centered footer** for a polished look
-
-You can copy-paste this directly into your `README.md`.
-
-If you later add screenshots/GIFs of the robot in RViz or MoveIt, insert them like this:
-
-```markdown
-![XArm7 in RViz](images/rviz_screenshot.png)
 ```
-
-or
-
-```markdown
-<p align="center">
-  <img src="images/demo.gif" width="70%">
-</p>
-```
-
-Enjoy your beautiful README! 🤖
+Have fun playing with Xarm7!
