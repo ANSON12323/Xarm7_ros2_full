@@ -34,9 +34,14 @@ Clone the packages into your workspace `src` folder.
 # Clone repositories
 git clone <YOUR_REPO_LINK> src/
 
+# Install dependencies:
+cd ~/ros2_ws
+rosdep install -i --from-path src --rosdistro jazzy -y
+
 # Build and Source
 colcon build
 source install/setup.bash
+
 ```
 ### 2. Execution (3 Terminals)
 
@@ -59,7 +64,7 @@ ros2 run xarm7_commander_cpp commander_cpp
 
 ### Option 1: Joint Command
 
-*Send an array of 7 float values.*
+*Send an array of 7 float values to 7 joints.*
 
 ```bash
 ros2 topic pub -1 /joint_command example_interfaces/msg/Float64MultiArray "{data: [0.0, 0.0, 0.0, 1.5, 0.0, 0.0, 0.0]}"
@@ -68,7 +73,7 @@ ros2 topic pub -1 /joint_command example_interfaces/msg/Float64MultiArray "{data
 
 ### Option 2: Joint Trajectory
 
-*Send a trajectory with timing.*
+*Send a trajectory with Trajectory Controller.*
 
 ```bash
 ros2 topic pub -1 /arm_controller/joint_trajectory trajectory_msgs/msg/JointTrajectory "{
