@@ -1,0 +1,320 @@
+<?xml version="1.0"?>
+<robot name="xarm7" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- Include Gazebo Parameters, ros2_control Plugins , Material -->
+    <xacro:include filename="$(find xarm7)/urdf/xarm7_gazebo.xacro" />
+    <xacro:include filename="$(find xarm7)/urdf/xarm7.ros2_control.xacro" />
+    <xacro:include filename="$(find xarm7)/urdf/common_properties.xacro" />
+    
+    <!-- Links -->
+    <link name="world"/>
+
+    <link name="base_link">
+        <xacro:default_inertial mass="5"/>
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <mesh filename="package://xarm7/meshes/link_base.stl" scale="1.0 1.0 1.0"/>
+            </geometry>   
+            <material name="blue" />
+        </visual>
+        <gazebo reference="base_link">
+            <material>Gazebo/Red</material> <!-- For Gazebo -->
+            <static>true</static>
+        </gazebo>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <mesh filename="package://xarm7/meshes/link_base.stl" scale="1.0 1.0 1.0"/>
+            </geometry>   
+            <material name="blue" />
+        </collision>
+    </link>
+
+    <joint name="virtual_joint" type="fixed">
+        <parent link="world"/>
+        <child link="base_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint> 
+    
+    <link name="link1">
+        <xacro:default_inertial mass="1.5"/>
+        <visual>
+            <origin rpy="0 0 0" xyz="-0 0 0"/>
+            <geometry>
+                <mesh filename="package://xarm7/meshes/link1.stl" scale="1.0 1.0 1.0"/>
+            </geometry>   
+            <material name="grey" />
+        </visual>
+        <gazebo reference="link1">
+            <material>Gazebo/Red</material> <!-- For Gazebo -->
+        </gazebo>
+        <collision>
+            <origin rpy="0 0 0" xyz="-0 0 0"/>
+            <geometry>
+                <mesh filename="package://xarm7/meshes/link1.stl" scale="1.0 1.0 1.0"/>
+            </geometry>   
+            <material name="grey" />
+        </collision>
+    </link>
+
+    <joint name="joint1" type="revolute">
+        <parent link="base_link"/>
+        <child link="link1"/>
+        <origin xyz="0 0 0.267" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-6.283" upper="6.283" effort="50" velocity="3.142"/>
+    </joint>
+
+    <link name="link2">
+        <xacro:default_inertial mass="1.5"/>
+        <visual>
+            <origin rpy="0 0 0" xyz="-0 0 0"/>
+            <geometry>
+                <mesh filename="package://xarm7/meshes/link2.stl" scale="1.0 1.0 1.0"/>
+            </geometry>
+            <material name="blue" />
+        </visual>
+        <gazebo reference="link2">
+            <material>Gazebo/Red</material> <!-- For Gazebo -->
+        </gazebo>
+        <collision>
+            <origin rpy="0 0 0" xyz="-0 0 0"/>
+            <geometry>
+                <mesh filename="package://xarm7/meshes/link2.stl" scale="1.0 1.0 1.0"/>
+            </geometry>   
+            <material name="grey" />
+        </collision>
+    </link>
+
+    <joint name="joint2" type="revolute">
+        <parent link="link1"/>
+        <child link="link2"/>
+        <origin xyz="0 0 0" rpy="-1.5708 0.0 0.0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-2.059" upper="2.094" effort="50" velocity="3.142"/>
+    </joint>
+
+    <link name="link3">
+        <xacro:default_inertial mass="1.2"/>
+        <visual>
+            <origin rpy="0 0 0" xyz="-0 0 0"/>
+            <geometry>
+                <mesh filename="package://xarm7/meshes/link3.stl" scale="1.0 1.0 1.0"/>
+            </geometry>
+            <material name="grey" />
+        </visual>
+        <gazebo reference="link3">
+            <material>Gazebo/Red</material> <!-- For Gazebo -->
+        </gazebo>
+        <collision>
+            <origin rpy="0 0 0" xyz="-0 0 0"/>
+            <geometry>
+                <mesh filename="package://xarm7/meshes/link3.stl" scale="1.0 1.0 1.0"/>
+            </geometry>   
+            <material name="grey" />
+        </collision>
+    </link>
+
+    <joint name="joint3" type="revolute">
+        <parent link="link2"/>
+        <child link="link3"/>
+        <origin xyz="0 -0.293 0" rpy="1.5708 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-6.283" upper="6.283" effort="50" velocity="3.142"/>
+    </joint>
+
+    <link name="link4">
+        <xacro:default_inertial mass="1.2"/>
+        <visual>
+            <origin rpy="0 0 0" xyz="-0 0 0"/>
+            <geometry>
+                <mesh filename="package://xarm7/meshes/link4.stl" scale="1.0 1.0 1.0"/>
+            </geometry>
+            <material name="blue" />
+        </visual>
+        <gazebo reference="link4">
+            <material>Gazebo/Red</material> <!-- For Gazebo -->
+        </gazebo>
+        <collision>
+            <origin rpy="0 0 0" xyz="-0 0 0"/>
+            <geometry>
+                <mesh filename="package://xarm7/meshes/link4.stl" scale="1.0 1.0 1.0"/>
+            </geometry>   
+            <material name="grey" />
+        </collision>
+    </link>
+
+    <joint name="joint4" type="revolute">
+        <parent link="link3"/>
+        <child link="link4"/>
+        <origin xyz="0.0525 0 0" rpy="1.5708 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-0.192" upper="3.927" effort="50" velocity="3.142"/>
+    </joint>
+
+    <link name="link5">
+        <xacro:default_inertial mass="1.1"/>
+        <visual>
+            <origin rpy="0 0 0" xyz="-0 0 0"/>
+            <geometry>
+                <mesh filename="package://xarm7/meshes/link5.stl" scale="1.0 1.0 1.0"/>
+            </geometry>
+            <material name="grey" />
+        </visual>
+        <gazebo reference="link5">
+            <material>Gazebo/Red</material> <!-- For Gazebo -->
+        </gazebo>
+        <collision>
+            <origin rpy="0 0 0" xyz="-0 0 0"/>
+            <geometry>
+                <mesh filename="package://xarm7/meshes/link5.stl" scale="1.0 1.0 1.0"/>
+            </geometry>   
+            <material name="grey" />
+        </collision>
+    </link>
+
+    <joint name="joint5" type="revolute">
+        <parent link="link4"/>
+        <child link="link5"/>
+        <origin xyz="0.0775 -0.3425 0" rpy="1.5708 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-6.283" upper="6.283" effort="50" velocity="3.142"/>
+    </joint>
+
+    <link name="link6">
+        <xacro:default_inertial mass="1.1"/>
+        <visual>
+            <origin rpy="0 0 0" xyz="-0 0 0"/>
+            <geometry>
+                <mesh filename="package://xarm7/meshes/link6.stl" scale="1.0 1.0 1.0"/>
+            </geometry>
+            <material name="blue" />
+        </visual>
+        <gazebo reference="link6">
+            <material>Gazebo/Red</material> <!-- For Gazebo -->
+        </gazebo>
+        <collision>
+            <origin rpy="0 0 0" xyz="-0 0 0"/>
+            <geometry>
+                <mesh filename="package://xarm7/meshes/link6.stl" scale="1.0 1.0 1.0"/>
+            </geometry>   
+            <material name="grey" />
+        </collision>
+    </link>
+
+    <joint name="joint6" type="revolute">
+        <parent link="link5"/>
+        <child link="link6"/>
+        <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-1.693" upper="3.142" effort="50" velocity="3.142"/>
+    </joint>
+
+    <link name="link7">
+        <xacro:default_inertial mass="0.1843"/>
+        <visual>
+            <origin rpy="0 0 0" xyz="-0 0 0"/>
+            <geometry>
+                <mesh filename="package://xarm7/meshes/link7.stl" scale="1.0 1.0 1.0"/>
+            </geometry>
+            <material name="grey" />
+        </visual>
+        <gazebo reference="link7">
+            <material>Gazebo/Red</material> <!-- For Gazebo -->
+        </gazebo>
+        <collision>
+            <origin rpy="0 0 0" xyz="-0 0 0"/>
+            <geometry>
+                <mesh filename="package://xarm7/meshes/link7.stl" scale="1.0 1.0 1.0"/>
+            </geometry>   
+            <material name="grey" />
+        </collision>
+    </link>
+
+    <joint name="joint7" type="revolute">
+        <parent link="link6"/>
+        <child link="link7"/>
+        <origin xyz="0.076 0.097 0" rpy="-1.5708 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-6.283" upper="6.283" effort="50" velocity="3.142"/>
+    </joint>
+
+    <link name="gripper_base_link">
+        <visual>
+            <geometry>
+                <box size="0.16 0.06 0.02" />
+            </geometry>
+            <origin xyz="0 0 0.01" rpy="0 0 0" />
+            <material name="dark_green" />
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.16 0.06 0.02" />
+            </geometry>
+            <origin xyz="0 0 0.01" rpy="0 0 0" />
+        </collision>
+        <xacro:box_inertia m="0.5" x="0.16" y="0.06" z="0.02"
+                           o_xyz="0 0 0.01" o_rpy="0 0 0" />
+    </link>
+
+    <joint name="gripper_base_joint" type="fixed">
+        <parent link="link7" />
+        <child link="gripper_base_link" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+    </joint>
+
+    <link name="gripper_left_finger_link">
+        <visual>
+            <geometry>
+                <box size="0.02 0.06 0.08" />
+            </geometry>
+            <origin xyz="0 0 0.04" rpy="0 0 0" />
+            <material name="light_green" />
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.02 0.06 0.08" />
+            </geometry>
+            <origin xyz="0 0 0.04" rpy="0 0 0" />
+        </collision>
+        <xacro:box_inertia m="0.2" x="0.02" y="0.06" z="0.08"
+                           o_xyz="0 0 0.04" o_rpy="0 0 0" />
+    </link>
+
+    <link name="gripper_right_finger_link">
+        <visual>
+            <geometry>
+                <box size="0.02 0.06 0.08" />
+            </geometry>
+            <origin xyz="0 0 0.04" rpy="0 0 0" />
+            <material name="light_green" />
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.02 0.06 0.08" />
+            </geometry>
+            <origin xyz="0 0 0.04" rpy="0 0 0" />
+        </collision>
+        <xacro:box_inertia m="0.2" x="0.02" y="0.06" z="0.08"
+                           o_xyz="0 0 0.04" o_rpy="0 0 0" />
+    </link>
+
+    <joint name="gripper_left_finger_joint" type="prismatic">
+        <parent link="gripper_base_link" />
+        <child link="gripper_left_finger_link" />
+        <origin xyz="-0.07 0 0.02" rpy="0 0 0" />
+        <axis xyz="1 0 0" />
+        <limit effort="10.0" velocity="1.0" lower="-0.00001" upper="0.06" />
+    </joint>
+
+    <joint name="gripper_right_finger_joint" type="prismatic">
+        <parent link="gripper_base_link" />
+        <child link="gripper_right_finger_link" />
+        <origin xyz="0.07 0 0.02" rpy="0 0 0" />
+        <axis xyz="1 0 0" />
+        <mimic joint="gripper_left_finger_joint" multiplier="-1.0" />
+        <limit effort="10.0" velocity="1.0" lower="-0.06" upper="0.00001" />
+    </joint>
+
+</robot>

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="xarm7">
+
+  <!-- ROS 2 Control -->
+  <gazebo>
+    <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+        <parameters>$(find xarm7_bringup)/config/xarm7_controllers.yaml</parameters>
+      </plugin>
+  </gazebo>
+
+</robot>
