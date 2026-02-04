@@ -24,26 +24,46 @@
 
 ---
 
-## 🚀 How to Run the Simulation
+### 📂 File Tree
+```text
+Xarm7_ros2_full/
+├── xarm7/
+│   ├── urdf/          # Robot model files
+│   ├── meshes/        # Visualization assets
+│   └── launch/        # Base launch files
+├── xarm7_bringup/
+│   ├── launch/        # Gazebo/Driver configs
+│   └── config/        # Controller YAMLs
+├── xarm7_moveit/
+│   ├── config/        # Planning configs
+│   └── launch/        # MoveIt runtime
+└── xarm7_commander_cpp/
+    ├── src/           # Source code
+    └── include/       # Headers
 
-### 1. Installation & Build
+---
 
-Clone the packages into your workspace `src` folder.
+### 🛠️ BUild Package
+**🚀 How to Run the Simulation**
+1️⃣ Installation & Build
+First, ensure your environment is set up. This project is optimized for ROS 2 Jazzy.
 
-```bash
-# Clone repositories
-git clone <YOUR_REPO_LINK> src/
-
-# Install dependencies:
+Bash
+# Navigate to your workspace
 cd ~/ros2_ws
+
+# Clone repository
+git clone <YOUR_REPO_LINK> src/xarm7_ros2_full
+
+# Install dependencies
 rosdep install -i --from-path src --rosdistro jazzy -y
 
-# Build and Source
-colcon build
+# Build the workspace
+colcon build --symlink-install
 source install/setup.bash
 
 ```
-### 2. Execution (3 Terminals)
+### Execution (3 Terminals)
 
 **Terminal 1: Launch Simulation**
 
